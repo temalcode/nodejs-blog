@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".\bootstrap-5.2.0-beta1-dist\css\bootstrap.min.css">
+    <title>Profile | Blog App</title>
+</head>
+
+<body class="bg-dark">
+
+    <nav class="navbar bg-dark navbar-dark pt-3">
+        <div class="container">
+            <a href="/" class="navbar-brand">Blog App</a>
+            <div class="d-flex">
+                <a href="/newpost" class="btn btn-primary me-2">Create a New Post</a>
+                <a href="/logout" class="btn btn-warning">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="text-light"> <%= 'Hello, ' + userProfile.nickname %> </h1>
+        <% if(userPosts.length == 0) { %>
+            <p class="text-light">You don't have any posts. Create a new post.</p>
+        <% } else{ %>
+        <p class="text-light">All the posts created by you.</p>
+        <div class="row g-4">
+            <% userPosts.forEach(post => { %>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= post.title %></h5>
+                            <p class="card-text"><%= post.content.substring(0, 190) + '...' %></p>
+                            <div class="d-flex">
+                                <a href="/posts/<%= post.id %>" class="btn btn-dark me-2">Read More</a>
+                                <a href="/updatepost/<%= post.id %>" class="btn btn-info me-2">Edit</a>
+                                <form action="/posts/delete/<%= post.id %>?_method=DELETE" method="post">
+                                    <input type="submit" value="Delete" class="btn btn-warning">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+
+        </div>
+        <% } %>
+    </div>
+    <div class="container fixed-bottom bg-secondary text-center text-light py-1">
+        <span>Developed by <a class="text-light" href="https://github.com/temalcode" target="_blank">@temalcode</a>.</span>
+    </div>
+</body>
+</html>

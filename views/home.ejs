@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".\bootstrap-5.2.0-beta1-dist\css\bootstrap.min.css">
+    <title>Home | Blog App</title>
+</head>
+<body class="bg-dark">
+  <nav class="navbar bg-dark navbar-dark pt-4">
+    <div class="container">
+      <a href="/" class="navbar-brand">Blog App</a>
+      <% if(isAuthenticated) { %>
+        <div class="d-flex">
+          <a href="/newpost" class="btn btn-primary me-2">Create a New Post</a>
+          <a class="btn btn-success me-2" href="/profile"><%= userProfile.nickname %></a>
+          <a class="btn btn-warning me-2" href="/logout">Logout</a>
+        </div>
+        <% } else{ %>
+      <div class="d-flex">
+        <a class="btn btn-info me-2" href="/login">Signup or Login</a>
+      </div>
+      <% } %>
+    </div>
+  </nav>
+        <div class="container py-5">
+          <h1 class="text-light mb-5">Welcome to Our Blog</h1>
+          <div class="row g-4">
+            <% allPosts.forEach(post => { %>
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title my-0"><%= post.title %></h5>
+                      <p>by <%= post.authorName %></p>
+                    <p class="card-text"><%= post.content.substring(0, 190) + '...' %></p>
+                    <a href="/posts/<%= post.id %>" class="btn btn-dark">Read More</a>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>  
+        <div class="fixed-bottom container bg-secondary text-center text-light py-1">
+          <span> <a class="text-light" href="#" onclick="showMessage()">Show the message again</a> | Developed by <a class="text-light" href="https://github.com/temalcode" target="_blank">@temalcode</a>.</span>
+        </div>  
+        
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Important</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>This is not a real blog. Do not share your personal stuff in this app. You don't have to provide your personal/work email address to test this app. You can use a temporary email address.</p>
+        <p>You can view this message again at anytime by clicking "show the message again" at footer (only in homepage).</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src=".\jquery-3.6.0.min.js"></script>
+<script src=".\bootstrap-5.2.0-beta1-dist\js\bootstrap.bundle.min.js"></script>
+<script>
+  $(window).on('load',function(){
+  if (!sessionStorage.getItem('shown-modal')){
+    $('#exampleModal').modal('show')
+    sessionStorage.setItem('shown-modal', 'true')
+  }
+  })
+
+  function showMessage(){
+    $('#exampleModal').modal('show')
+  }
+
+</script>    
+</body>
+</html>

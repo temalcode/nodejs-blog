@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".\bootstrap-5.2.0-beta1-dist\css\bootstrap.min.css">
+    <title>Create new post | Blog App</title>
+</head>
+<body class="bg-dark">
+    
+    <nav class="navbar bg-dark navbar-dark pt-3">
+        <div class="container">
+            <a href="/" class="navbar-brand">Blog App</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h3 class="text-light mt-3">Create a New Post</h3>
+        <form action="/posts/create" method="post" class="w-75">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Title" name="title">
+                <label for="floatingInput">Post Title</label>
+              </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="The conent goes here ..." id="floatingTextarea2" style="height: 250px" name="content"></textarea>
+                <label for="floatingTextarea2">Post Content</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a  href="/" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    <div class="container fixed-bottom bg-secondary text-center text-light py-1">
+        <span>Developed by <a class="text-light" href="https://github.com/temalcode" target="_blank">@temalcode</a>.</span>
+    </div>
+</body>
+</html>
